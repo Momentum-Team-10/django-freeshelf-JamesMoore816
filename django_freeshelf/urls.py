@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
-from books import views
+from books import views as books_views
 
 urlpatterns = [
-    path("", views.home, name = 'home'),
+    path("", books_views.home, name = 'home'),
     path("admin/", admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-
+    path('books/add/', books_views.add_book, name='add_book'),
 ]

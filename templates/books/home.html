@@ -5,7 +5,7 @@
 
 <div class='flex flex-wrap'>
   {% for book in books %}
-  <div class='w-30 pa3'>
+  <div class='pa3'>
     <div class='ma1'><i class='fas fa-book mr1'></i>{{ book.title }}</div>
 
     {% if book.author %}
@@ -14,27 +14,21 @@
     </div>
     {% endif %}
 
-    {% if book.description %}
-    <div class='flex'>
-      <div class='ma1'>{{ book.description }}</div>
-    </div>
-    {% endif %}
-
     {% if book.url %}
     <div class='flex'>
-      <div class='ma1'>{{ book.url }}</div>
+      <div class='ma1'><i class='fas fa-link mr1'></i>{{ book.url }}</div>
     </div>
     {% endif %}
 
     {% if book.description %}
     <div class='flex'>
-      <div class='ma1'><i class='fas fa-calendar-alt mr1'></i>{{ book.description }}</div>
+      <div class='ma1'><i class='fas fa-info-circle mr1'></i>{{ book.description }}</div>
     </div>
     {% endif %}
 
     {% if book.created_at %}
     <div class='flex'>
-      <div class='ma1'>{{ book.created_at }}</div>
+      <div class='ma1'><i class='fas fa-asterisk mr1'></i>{{ book.created_at }}</div>
     </div>
     {% endif %}
 
