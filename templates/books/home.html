@@ -3,8 +3,6 @@
 {% block content %}
 <h1 class='pl3'>Django Freeshelf</h1>
 
-<p class='pl3'><a href="{% url 'new_book' %}">Add New Book</a></p>
-
 <div class='flex flex-wrap'>
   {% for book in books %}
   <div class='w-30 pa3'>
