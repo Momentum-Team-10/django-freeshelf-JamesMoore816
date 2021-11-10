@@ -9,6 +9,7 @@ def home(request):
     return render(request, "books/home.html",
                   {"books": books})
 
+@login_required
 def add_book(request):
     if request.method == 'GET':
         form = BookForm()
@@ -20,6 +21,7 @@ def add_book(request):
 
     return render(request, "books/add_book.html", {"form": form})
 
+@login_required
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'GET':
@@ -35,6 +37,7 @@ def edit_book(request, pk):
         "book": book
     })
 
+@login_required
 def delete_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
