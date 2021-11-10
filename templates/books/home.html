@@ -1,12 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class='pl3'>Django Freeshelf</h1>
+<header class="flex items-center justify-between bg-green white ph3">
+    <div id="title">
+      <h1 class="white">Django Freeshelf</h1>
+    </div>
+    <div id="account-menu">
+        {% if request.user.is_authenticated %} <a class="washed-blue" href="accounts/logout/">Logout</a> | <a class="washed-blue" href="accounts/register/">Register</a>
+        {% else %} <a class="washed-blue" href="accounts/login/">Login</a> | <a class="washed-blue" href="accounts/register/">Register</a> {% endif %}
+    </div>
+  </header>
+
+{% if request.user.is_authenticated %}
+<p class='pl3'><a href="{% url 'add_book' %}">Add New Book</a></p>
+{% endif %}
 
 <div class='flex flex-wrap'>
   {% for book in books %}
   <div class='pa3'>
-    <div class='ma1'><i class='fas fa-book mr1'></i>{{ book.title }}</div>
+    {% if book.url %} <div class='ma1'><i class='fas fa-book mr1'></i><a href="{{ book.url }}">{{ book.title }}</a></div>
+    {% else %} <div class='ma1'><i class='fas fa-book mr1'></i>{{ book.title }}</div> {% endif %}
+    
 
     {% if book.author %}
     <div class='flex'>
@@ -14,11 +28,11 @@
     </div>
     {% endif %}
 
-    {% if book.url %}
+    <!-- {% if book.url %}
     <div class='flex'>
       <div class='ma1'><i class='fas fa-link mr1'></i>{{ book.url }}</div>
     </div>
-    {% endif %}
+    {% endif %} -->
 
     {% if book.description %}
     <div class='flex'>
@@ -31,7 +45,12 @@
       <div class='ma1'><i class='fas fa-asterisk mr1'></i>{{ book.created_at }}</div>
     </div>
     {% endif %}
-
+    {% if request.user.is_authenticated %}
+    <p>
+        <a href="{% url 'edit_book' pk=book.pk %}">Edit Book</a><br>    
+        <a class="red" href="{% url 'delete_book' pk=book.pk %}">Delete Book</a>
+    </p>
+    {% endif %}
   </div>
   {% endfor %}
 </div>  
