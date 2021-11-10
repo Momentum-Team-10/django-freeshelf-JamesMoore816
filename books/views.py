@@ -5,9 +5,14 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
-    books = Book.objects.all()
+    books = reversed(Book.objects.all())
     return render(request, "books/home.html",
                   {"books": books})
+
+def view_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    return render(request, "books/view_book.html",
+                  {"book": book})
 
 @login_required
 def add_book(request):
