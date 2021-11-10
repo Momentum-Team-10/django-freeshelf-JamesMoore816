@@ -4,7 +4,7 @@
 <h1 class='pl3'>Delete Book</h1>
 
 <div class='pl3'>
-  <form action="{% url 'delete_book' pk=book.pk %}" method="POST">
+  <form action="{% url 'delete_book' slug=book.slug %}" method="POST">
     {% csrf_token %}
     <p>Are you sure you want to remove <span class="b">{{ book.title }}</span>?</p>
     <div>

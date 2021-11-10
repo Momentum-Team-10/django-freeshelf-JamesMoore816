@@ -11,7 +11,7 @@
     </div>
   </header>
 
-{% if request.user.is_authenticated %}
+{% if request.user.is_staff %}
 <p class='pl3'><a href="{% url 'add_book' %}">Add New Book</a></p>
 {% endif %}
 
@@ -45,10 +45,10 @@
       <div class='ma1'><i class='fas fa-asterisk mr1'></i>{{ book.created_at }}</div>
     </div>
     {% endif %}
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
     <p>
-        <a href="{% url 'edit_book' pk=book.pk %}">Edit Book</a><br>    
-        <a class="red" href="{% url 'delete_book' pk=book.pk %}">Delete Book</a>
+        <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a><br>    
+        <a class="red" href="{% url 'delete_book' slug=book.slug %}">Delete Book</a>
     </p>
     {% endif %}
   </div>
