@@ -26,4 +26,5 @@ urlpatterns = [
     path('books/<slug:slug>/', books_views.view_book, name='view_book'),
     path('books/<slug:slug>/edit/', books_views.edit_book, name='edit_book'),
     path('books/<slug:slug>/delete/', books_views.delete_book, name='delete_book'),
+    path('categories/<slug:slug>/', books_views.category_search, name='category_search'),
 ]

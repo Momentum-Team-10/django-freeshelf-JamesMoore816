@@ -7,7 +7,7 @@
     </div>
     <ul class="list ml1 pa0 flex flex-wrap">
         {% for category in categories %}
-        <li class="mr2 pr2 bw1 br"><a href="#">{{ category.name }}</a></li>
+        <li class="mr2 pr2 bw1 br"><a href="{% url 'category_search' slug=category.slug %}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
   </nav>
@@ -38,7 +38,7 @@
     <div class='flex'>
       <div class="mr2 pr2 bw1 br"><i class='fas fa-asterisk mr1'></i>Added on: {{ book.created_at }}</div>
       {% for category in book.categories.all %}
-      <div class="mr2"><a href="#">{{ category.name }}</a></div>
+      <div class="mr2"><a href="{% url 'category_search' slug=category.slug %}">{{ category.name }}</a></div>
     {% endfor %}
     </div>
 

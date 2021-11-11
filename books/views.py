@@ -52,3 +52,9 @@ def delete_book(request, slug):
 
     return render(request, "books/delete_book.html",
                   {"book": book})
+
+def category_search(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    books = reversed(Book.objects.filter(categories__slug=slug))
+    return render(request, "books/category_search.html",
+                  {"books": books, "category": category,})
