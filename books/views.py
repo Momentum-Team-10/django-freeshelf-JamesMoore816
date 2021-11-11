@@ -8,7 +8,7 @@ def home(request):
     books = reversed(Book.objects.all())
     categories = (Category.objects.all())
     return render(request, "books/home.html",
-                  {"books": books})
+                  {"books": books, "categories": categories,})
 
 def view_book(request, slug):
     book = get_object_or_404(Book, slug=slug)

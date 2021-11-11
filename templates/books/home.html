@@ -1,41 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<header class="flex items-center justify-between bg-green white ph3">
-    <div id="title">
-      <h1 class="white">Django Freeshelf</h1>
+  <nav id="category-nav" class="flex items-center">
+    <div class="ml3">
+      Books by category:
     </div>
-    <div id="account-menu">
-        {% if request.user.is_authenticated %} <a class="washed-blue" href="accounts/logout/">Logout</a> | <a class="washed-blue" href="accounts/register/">Register</a>
-        {% else %} <a class="washed-blue" href="accounts/login/">Login</a> | <a class="washed-blue" href="accounts/register/">Register</a> {% endif %}
-    </div>
-  </header>
+    <ul class="list ml1 pa0 flex flex-wrap">
+        {% for category in categories %}
+        <li class="mr2 pr2 bw1 br"><a href="#">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+  </nav>
 
 {% if request.user.is_staff %}
 <p class='pl3'><a href="{% url 'add_book' %}">Add New Book</a></p>
 {% endif %}
 
-<div class='flex flex-wrap'>
+<div class='flex flex-wrap ml2 mt2'>
   {% for book in books %}
   <div class='pa3'>
-    {% if book.url %} <div class="normal f3"><i class='fas fa-book mr1'></i><a href="{{ book.url }}">{{ book.title }}</a></div>
+    {% if book.url %} <div class="normal f3 mb1"><i class='fas fa-book mr1'></i><a href="{{ book.url }}">{{ book.title }}</a></div>
     {% else %} <div class="normal f3"><i class='fas fa-book mr1'></i>{{ book.title }}</div> {% endif %}
     
 
     {% if book.author %}
-    <div class='flex'>
+    <div class='flex mb1'>
       <div class="f4"><i class='fas fa-user mr1'></i>{{ book.author }}</div>
     </div>
     {% endif %}
 
-    <!-- {% if book.url %}
-    <div class='flex'>
-      <div class='ma1'><i class='fas fa-link mr1'></i>{{ book.url }}</div>
-    </div>
-    {% endif %} -->
-
     {% if book.description %}
-    <div class='flex'>
+    <div class='flex mb1'>
       <div class="lh-copy"><i class='fas fa-info-circle mr1'></i>{{ book.description }}</div>
     </div>
     {% endif %}
@@ -43,7 +38,7 @@
     <div class='flex'>
       <div class="mr2 pr2 bw1 br"><i class='fas fa-asterisk mr1'></i>Added on: {{ book.created_at }}</div>
       {% for category in book.categories.all %}
-      <div class="mr2">{{ category.name }}</div>
+      <div class="mr2"><a href="#">{{ category.name }}</a></div>
     {% endfor %}
     </div>
 
