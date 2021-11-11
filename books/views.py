@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Book
+from .models import Book, Category
 from .forms import BookForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
     books = reversed(Book.objects.all())
+    categories = (Category.objects.all())
     return render(request, "books/home.html",
                   {"books": books})
 
