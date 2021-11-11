@@ -60,9 +60,9 @@ def category_search(request, slug):
                   {"books": books, "category": category,})
 
 @login_required
-def profile(request):
+def favorites_page(request):
     user = request.user
     books = reversed(Book.objects.filter(favorite=user.pk))
     categories = (Category.objects.all())
-    return render(request, "books/profile.html",
+    return render(request, "books/favorites_page.html",
                   {"user": user, "books": books, "categories": categories,})

@@ -21,7 +21,7 @@ from books import views as books_views
 urlpatterns = [
     path("", books_views.home, name = 'home'),
     path("admin/", admin.site.urls),
-    path('accounts/profile/', books_views.profile, name = 'profile'),
+    path('accounts/favorites/', books_views.favorites_page, name = 'favorites_page'),
     path('accounts/', include('registration.backends.simple.urls')),
     path('books/add/', books_views.add_book, name='add_book'),
     path('books/<slug:slug>/', books_views.view_book, name='view_book'),
