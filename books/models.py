@@ -28,6 +28,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+        
 
 class Book(models.Model):
     title = models.CharField(max_length=255)
@@ -36,6 +37,7 @@ class Book(models.Model):
     description = models.TextField(max_length=800, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     categories = models.ManyToManyField('Category', related_name='books')
+    favorite = models.ManyToManyField('User', related_name='favorited_by_user')
     slug = models.SlugField(null=True)
 
     def __str__(self):

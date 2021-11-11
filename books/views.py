@@ -58,3 +58,11 @@ def category_search(request, slug):
     books = reversed(Book.objects.filter(categories__slug=slug))
     return render(request, "books/category_search.html",
                   {"books": books, "category": category,})
+
+@login_required
+def profile(request):
+    user = request.user
+    books = reversed(Book.objects.filter(favorite=user.pk))
+    categories = (Category.objects.all())
+    return render(request, "books/profile.html",
+                  {"user": user, "books": books, "categories": categories,})

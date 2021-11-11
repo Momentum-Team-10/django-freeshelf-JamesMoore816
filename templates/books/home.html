@@ -1,56 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-<nav id="category-nav" class="flex items-center">
+  <nav id="category-nav" class="flex items-center">
     <div class="pa1 ml3">
-        Books by category:
+      Books by category:
     </div>
     <ul class="list ml2 pa0 flex flex-wrap">
         {% for category in categories %}
         <li class="mr2 pr2 bw1 br"><a href="{% url 'category_search' slug=category.slug %}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
-</nav>
-{% if request.user.is_authenticated %}
+  </nav>
+  {% if request.user.is_authenticated %}
 {% if request.user.is_staff %}
 <p class='pl3'><a href="{% url 'add_book' %}">Add New Book</a></p>
 {% endif %}
 
 <div class='flex flex-wrap ml2 mt2'>
-    {% for book in books %}
-    <div class='pa3'>
-        {% if book.url %} <div class="normal f3 mb1"><i class='fas fa-book mr1'></i><a href="{{ book.url }}">{{
-                book.title }}</a></div>
-        {% else %} <div class="normal f3"><i class='fas fa-book mr1'></i>{{ book.title }}</div> {% endif %}
+  {% for book in books %}
+  <div class='pa3'>
+    {% if book.url %} <div class="normal f3 mb1"><i class='fas fa-book mr1'></i><a href="{{ book.url }}">{{ book.title }}</a></div>
+    {% else %} <div class="normal f3"><i class='fas fa-book mr1'></i>{{ book.title }}</div> {% endif %}
+    
 
-
-        {% if book.author %}
-        <div class='flex mb1'>
-            <div class="f4"><i class='fas fa-user mr1'></i>{{ book.author }}</div>
-        </div>
-        {% endif %}
-
-        {% if book.description %}
-        <div class='flex mb1'>
-            <div class="lh-copy"><i class='fas fa-info-circle mr1'></i>{{ book.description }}</div>
-        </div>
-        {% endif %}
-
-        <div class='flex'>
-            <div class="mr2 pr2 bw1 br"><i class='fas fa-asterisk mr1'></i>Added on: {{ book.created_at }}</div>
-            {% for category in book.categories.all %}
-            <div class="mr2"><a href="{% url 'category_search' slug=category.slug %}">{{ category.name }}</a></div>
-            {% endfor %}
-        </div>
-
-        {% if request.user.is_staff %}
-        <p>
-            <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a><br>
-            <a class="red" href="{% url 'delete_book' slug=book.slug %}">Delete Book</a>
-        </p>
-        {% endif %}
+    {% if book.author %}
+    <div class='flex mb1'>
+      <div class="f4"><i class='fas fa-user mr1'></i>{{ book.author }}</div>
     </div>
+    {% endif %}
+
+    {% if book.description %}
+    <div class='flex mb1'>
+      <div class="lh-copy"><i class='fas fa-info-circle mr1'></i>{{ book.description }}</div>
+    </div>
+    {% endif %}
+   
+    <div class='flex'>
+      <div class="mr2 pr2 bw1 br"><i class='fas fa-asterisk mr1'></i>Added on: {{ book.created_at }}</div>
+      {% for category in book.categories.all %}
+      <div class="mr2"><a href="{% url 'category_search' slug=category.slug %}">{{ category.name }}</a></div>
     {% endfor %}
+    </div>
+
+    {% if request.user.is_staff %}
+    <p>
+        <a href="{% url 'edit_book' slug=book.slug %}">Edit Book</a><br>    
+        <a class="red" href="{% url 'delete_book' slug=book.slug %}">Delete Book</a>
+    </p>
+    {% endif %}
+  </div>
+  {% endfor %}
 </div>
 {% else %}<div class="f3 ma1 pa3">Please register or login.</div>
 {% endif %}
