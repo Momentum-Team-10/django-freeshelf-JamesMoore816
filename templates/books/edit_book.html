@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if request.user.is_staff %}
 <h1 class='pl3'>Edit Book</h1>
 
 <div class='pl3'>
@@ -12,4 +13,6 @@
     </div>
   </form>
 </div>
+{% else %}<div class="f3 ma1 pa3">Only staff may proceed.</div>
+{% endif %}
 {% endblock %}
